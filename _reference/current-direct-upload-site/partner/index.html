@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Buyer Discovery Risk Scan — Partner Edition | Rushdan Rosdi</title>
+  <meta name="description" content="A private partner diagnostic for Fractional CMOs, consultants and specialist agencies who need to understand how B2B brands appear in AI-assisted buyer research." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="AI Buyer Discovery Risk Scan — Partner Edition | Rushdan Rosdi" />
+  <meta property="og:description" content="A private partner diagnostic for Fractional CMOs, consultants and specialist agencies who need to understand how B2B brands appear in AI-assisted buyer research." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rushdanrosdi.com/partner/" />
+  <link rel="canonical" href="https://rushdanrosdi.com/partner/" />
+  <style>
+:root {
+  --bg: #0b1220;
+  --card: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --soft: #94a3b8;
+  --accent: #38bdf8;
+  --accent-2: #a78bfa;
+  --max: 1080px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 30%),
+    radial-gradient(circle at top right, rgba(167, 139, 250, 0.18), transparent 34%),
+    var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+.page { min-height: 100vh; padding: 32px 20px; }
+.wrap { max-width: var(--max); margin: 0 auto; }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 0 56px;
+}
+.brand { font-weight: 800; letter-spacing: -0.03em; font-size: 20px; }
+.nav { display: flex; gap: 18px; color: var(--muted); font-size: 14px; flex-wrap: wrap; }
+.nav a:hover { color: var(--text); }
+.hero {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 32px;
+  align-items: center;
+  padding: 42px 0 56px;
+}
+.hero.single { grid-template-columns: 1fr; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.9);
+}
+h1 {
+  margin: 0;
+  max-width: 850px;
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+}
+.lead {
+  max-width: 760px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: clamp(18px, 2vw, 22px);
+}
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  border: 1px solid var(--card-border);
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #06111f;
+  border: 0;
+}
+.btn-secondary { background: rgba(255, 255, 255, 0.06); color: var(--text); }
+.panel, .card {
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(18px);
+}
+.panel {
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+.panel h2, .panel h3 { margin: 0 0 12px; letter-spacing: -0.03em; }
+.panel p, .card p, .card li { color: var(--muted); margin: 0; }
+.mini-list { display: grid; gap: 14px; margin-top: 22px; }
+.mini-item {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.mini-item strong { display: block; margin-bottom: 4px; }
+.mini-item span { color: var(--soft); font-size: 14px; }
+section { padding: 34px 0; }
+.section-title { max-width: 780px; margin-bottom: 22px; }
+.section-title h2 {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+.section-title p { margin: 0; color: var(--muted); font-size: 18px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.card { border-radius: 24px; padding: 22px; }
+.card h3 { margin: 0 0 10px; font-size: 20px; letter-spacing: -0.03em; }
+.card.highlight { background: linear-gradient(180deg, rgba(56, 189, 248, 0.11), rgba(255, 255, 255, 0.055)); }
+ul { padding-left: 18px; margin: 0; }
+li + li { margin-top: 6px; }
+.strip {
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 26px;
+  padding: 28px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.10), rgba(167, 139, 250, 0.08));
+}
+.steps { display: grid; gap: 14px; }
+.step {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 16px;
+  align-items: start;
+  border: 1px solid var(--card-border);
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.055);
+}
+.number {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 900; color: #06111f;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.step h3 { margin: 0 0 4px; letter-spacing: -0.03em; }
+.step p { margin: 0; color: var(--muted); }
+.faq { display: grid; gap: 12px; }
+details {
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.055);
+}
+summary { cursor: pointer; font-weight: 800; letter-spacing: -0.02em; }
+details p { color: var(--muted); margin: 12px 0 0; }
+.footer {
+  padding: 38px 0 10px;
+  color: var(--soft);
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  border-top: 1px solid var(--card-border);
+  margin-top: 28px;
+}
+.footer a { color: var(--muted); }
+.article {
+  max-width: 830px;
+}
+.article p {
+  color: var(--muted);
+  font-size: 18px;
+  margin: 0 0 18px;
+}
+.article h2 {
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin: 42px 0 12px;
+}
+@media (max-width: 900px) {
+  header { align-items: flex-start; flex-direction: column; padding-bottom: 32px; }
+  .hero, .grid, .grid-2 { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; }
+}
+</style>
+  
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "AI Buyer Discovery Risk Scan — Partner Edition",
+  "provider": {
+    "@type": "Person",
+    "name": "Rushdan Rosdi",
+    "url": "https://rushdanrosdi.com/"
+  },
+  "serviceType": "AI Search and AI Visibility Diagnostic",
+  "areaServed": ["United States", "United Kingdom", "Canada", "Australia", "Malaysia"],
+  "description": "A private partner diagnostic for Fractional CMOs, consultants and specialist agencies who need to understand how B2B brands appear in AI-assisted buyer research."
+}
+</script>
+
+</head>
+<body>
+  <div class="page">
+    <div class="wrap">
+      <header>
+        <a class="brand" href="/">Rushdan Rosdi</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a href="/partner/">Partner</a>
+          <a href="/about/">About</a>
+          <a href="/#focus">Focus</a>
+          <a href="/#scan">Risk Scan</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+      </header>
+      
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> Partner Edition</div>
+      <h1>AI Buyer Discovery Risk Scan</h1>
+      <p class="lead">
+        A private diagnostic for Fractional CMOs, consultants and specialist agencies who need to understand how a B2B brand appears inside AI-assisted buyer research.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:rushdan@rushdanrosdi.com?subject=AI%20Buyer%20Discovery%20Risk%20Scan">Request partner discussion</a>
+        <a class="btn btn-secondary" href="#how">See how it works</a>
+        <a class="btn btn-secondary" href="/about/">About Rushdan</a>
+      </div>
+    </div>
+    <aside class="panel" aria-label="Partner summary">
+      <h2>Designed for partner-led work</h2>
+      <p>You keep the client relationship. I provide the AI visibility diagnostic, evidence layer and opportunity map behind the scenes or in a controlled partner format.</p>
+      <div class="mini-list">
+        <div class="mini-item"><strong>One client</strong><span>Focused on a specific B2B brand or portfolio company.</span></div>
+        <div class="mini-item"><strong>One commercial category</strong><span>Built around real buyer questions and competitor comparisons.</span></div>
+        <div class="mini-item"><strong>Executive-ready output</strong><span>Findings packaged for action, not technical curiosity.</span></div>
+      </div>
+    </aside>
+  </section>
+
+  <section id="problem">
+    <div class="section-title">
+      <h2>B2B buyers are no longer only searching on Google.</h2>
+      <p>They ask AI tools to shortlist vendors, compare options, explain categories, evaluate trade-offs and identify credible providers. Many brands have no visibility into how those answers are formed.</p>
+    </div>
+    <div class="grid">
+      <div class="card"><h3>The hidden gap</h3><p>A company may look strong in traditional SEO, yet fail to appear when buyers use AI tools for early-stage research.</p></div>
+      <div class="card"><h3>The trust risk</h3><p>AI systems may summarise outdated positioning, ignore proof points or recommend competitors more consistently.</p></div>
+      <div class="card"><h3>The partner opportunity</h3><p>Fractional leaders can use AI discovery evidence to sharpen strategy, content, website, PR and authority priorities.</p></div>
+    </div>
+  </section>
+
+  <section><div class="strip"><div class="section-title" style="margin-bottom:0;"><h2>Not another SEO audit.</h2><p>This scan answers a sharper commercial question: <strong style="color:#f8fafc;">when buyers ask AI systems about this category, does the client enter the consideration set — and if not, why?</strong></p></div></div></section>
+
+  <section id="fit">
+    <div class="section-title"><h2>Best fit</h2><p>The scan works best when the downstream client sells into a considered B2B buying journey where trust, authority and category visibility matter.</p></div>
+    <div class="grid">
+      <div class="card highlight"><h3>Fractional CMOs</h3><p>Use the scan as a specialist evidence layer inside strategy, GTM, positioning, website or content engagements.</p></div>
+      <div class="card"><h3>B2B SaaS & Tech</h3><p>Especially useful for cybersecurity, fintech, healthtech, industrial SaaS, vertical SaaS and technical services.</p></div>
+      <div class="card"><h3>Specialist agencies</h3><p>Add AI buyer-discovery diagnostics without building a dedicated GEO or answer-engine optimisation team immediately.</p></div>
+    </div>
+  </section>
+
+  <section id="deliverables">
+    <div class="section-title"><h2>Deliverables</h2><p>Output is designed for partner use: clear enough for executives, detailed enough for marketing action.</p></div>
+    <div class="grid">
+      <div class="card"><h3>Executive summary</h3><p>A concise view of the client’s AI discovery position, key risks and most important opportunities.</p></div>
+      <div class="card"><h3>Evidence appendix</h3><p>Query sets, observed AI outputs, competitor patterns, citation signals and message-accuracy findings.</p></div>
+      <div class="card"><h3>90-day action list</h3><p>Practical recommendations across website, content, authority, PR, credibility signals and knowledge assets.</p></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="section-title"><h2>How partner engagement works</h2><p>The process is intentionally controlled so the partner keeps strategic ownership and client trust.</p></div>
+    <div class="steps">
+      <div class="step"><div class="number">1</div><div><h3>Private fit check</h3><p>We identify one client category where AI-assisted discovery may affect buyer consideration.</p></div></div>
+      <div class="step"><div class="number">2</div><div><h3>Scope the scan</h3><p>We agree the client, category, competitors, buyer questions, deliverable format and partner role.</p></div></div>
+      <div class="step"><div class="number">3</div><div><h3>Run the diagnostic</h3><p>I perform the AI visibility analysis and package the findings into an executive-ready format.</p></div></div>
+      <div class="step"><div class="number">4</div><div><h3>Partner briefing</h3><p>You receive the report, interpretation and suggested next steps before anything is shown to the client.</p></div></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-title"><h2>Partner FAQ</h2><p>Common questions before introducing this type of diagnostic into a client relationship.</p></div>
+    <div class="faq">
+      <details><summary>Is this the same as SEO?</summary><p>No. Traditional SEO focuses mainly on visibility in search results. This scan focuses on how AI systems answer buyer questions, mention brands, cite sources and build vendor shortlists.</p></details>
+      <details><summary>Can the partner stay in front of the client?</summary><p>Yes. The default model is partner-controlled. I can work privately behind the scenes or support a controlled briefing if needed.</p></details>
+      <details><summary>Can this be white-labelled?</summary><p>Yes. The engagement can be structured as a white-label or partner-branded diagnostic, depending on the relationship and scope.</p></details>
+      <details><summary>Do you need access to client systems?</summary><p>Usually no for the first scan. The initial diagnostic can be run from public-facing assets, AI-answer observations and category research.</p></details>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="panel">
+      <h2>Private partner discussion</h2>
+      <p>This is currently offered as a private partner engagement for selected Fractional CMOs, consultants and specialist agencies working with B2B clients.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:rushdan@rushdanrosdi.com?subject=AI%20Buyer%20Discovery%20Risk%20Scan%20-%20Partner%20Discussion">Email Rushdan</a>
+        <a class="btn btn-secondary" href="/">Return to homepage</a>
+        <a class="btn btn-secondary" href="/about/">About Rushdan</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+      <footer class="footer">
+        <span>© 2026 Rushdan Rosdi. All rights reserved.</span>
+        <span>AI Search · GEO · AI Visibility · B2B Discovery</span>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getReadingTime } from '../../utils/readingTime';
+
+const title = 'Lab Notes — AI Search Research | Rushdan Rosdi';
+const description = 'Working notes, observations and field research on AI Search, GEO, B2B buyer discovery and brand visibility.';
+const notes = (await getCollection('lab', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout {title} {description} canonicalPath="/lab/">
+  <section class="page-intro">
+    <p class="eyebrow"><span class="signal-dot"></span>Lab Notes</p>
+    <h1>Research in public. <em>Evidence before certainty.</em></h1>
+    <p class="lead">Practical research observations on AI Search, GEO and B2B buyer discovery. These notes document patterns from ongoing field work, with an emphasis on evidence that marketing teams can examine and act on.</p>
+  </section>
+
+  <div class="lab-list">
+    {notes.map((note, index) => (
+      <article class="note-row">
+        <div class="note-number">{String(index + 1).padStart(2, '0')}</div>
+        <div class="note-content">
+          <div class="note-meta">
+            <time datetime={note.data.pubDate.toISOString()}>
+              {note.data.pubDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
+            </time>
+            <span>{getReadingTime(note.body ?? '', note.data.readingTime)} min read</span>
+            {note.data.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+          <h2><a href={`/lab/${note.data.canonicalSlug}/`}>{note.data.title}</a></h2>
+          <p>{note.data.description}</p>
+        </div>
+        <a class="note-arrow" href={`/lab/${note.data.canonicalSlug}/`} aria-label={`Read ${note.data.title}`}>↗</a>
+      </article>
+    ))}
+  </div>
+</BaseLayout>

@@ -1,0 +1,82 @@
+---
+import { existsSync } from 'node:fs';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTA from '../components/CTA.astro';
+
+const profileImagePath = '/images/profile/rushdan-rosdi-headshot-2026.png';
+const hasProfileImage = existsSync(`public${profileImagePath}`);
+const title = 'About Rushdan Rosdi — From Spacecraft Engineering to AI Search';
+const description = 'Rushdan Rosdi is an AI Search and Visibility Specialist with a background in spacecraft engineering, satellite imaging and structured technical research.';
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Rushdan Rosdi',
+  url: 'https://rushdanrosdi.com/',
+  jobTitle: 'AI Search & Visibility Specialist',
+  description,
+  sameAs: ['https://coe.my/'],
+};
+---
+
+<BaseLayout {title} {description} {schema}>
+  <section class="hero hero--about">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="signal-dot"></span>About Rushdan</p>
+      <h1>From spacecraft engineering to <em>AI Search.</em></h1>
+      <p class="lead">I started in satellite imaging systems and astronautical engineering research. Today, I apply the same discipline to AI-assisted buyer discovery for B2B brands.</p>
+    </div>
+    <aside class="about-principle">
+      {hasProfileImage ? (
+        <img
+          class="about-profile-image"
+          src={profileImagePath}
+          alt="Rushdan Rosdi"
+          width="640"
+          height="640"
+          loading="eager"
+          decoding="async"
+        />
+      ) : (
+        <span class="monogram" aria-hidden="true">RR</span>
+      )}
+      <div class="about-profile-details">
+        <h2>Rushdan Rosdi</h2>
+        <p class="about-role">AI Search & Visibility Specialist</p>
+        <p class="about-former-role">Former Spacecraft Engineer</p>
+      </div>
+      <blockquote>
+        <p>“Define the problem carefully. Separate evidence from assumptions. Make complexity useful.”</p>
+      </blockquote>
+    </aside>
+  </section>
+
+  <div class="about-layout">
+    <aside class="about-aside">
+      <p class="kicker">Current focus</p>
+      <ul>
+        <li>AI Buyer Discovery</li>
+        <li>AI Search / GEO diagnostics</li>
+        <li>B2B visibility mapping</li>
+        <li>Partner-led research</li>
+      </ul>
+    </aside>
+    <article class="prose">
+      <p class="prose-lead">My early work was in spacecraft engineering, satellite imaging systems and camera-related engineering research.</p>
+      <p>That environment shaped how I think: define the problem carefully, separate evidence from assumptions, and turn complex technical information into something people can act on. That background now informs my work in AI Search, GEO and B2B visibility diagnostics.</p>
+
+      <h2>Why AI visibility needs structured analysis</h2>
+      <p>Buyers are no longer only searching on Google. They increasingly use tools like ChatGPT, Gemini, Perplexity and Google AI surfaces to compare vendors, shortlist providers and understand categories.</p>
+      <p>For B2B brands, the question is no longer only “Do we rank?” It is also: “Are we included, described accurately and trusted inside AI-assisted buyer research?”</p>
+
+      <h2>The operating principle</h2>
+      <p>I do not treat AI visibility as a buzzword. I treat it as a buyer-discovery problem that needs careful research, clear evidence, practical recommendations and business context.</p>
+    </article>
+  </div>
+
+  <CTA
+    title="Bring a more rigorous lens to AI visibility."
+    text="Explore the partner diagnostic or get in touch about a focused B2B discovery question."
+    secondaryLabel="Partner Edition"
+    secondaryHref="/partner/"
+  />
+</BaseLayout>

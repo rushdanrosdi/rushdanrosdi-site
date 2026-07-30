@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rushdan Rosdi — AI Search & Visibility Specialist</title>
+  <meta name="description" content="Rushdan Rosdi helps B2B marketing leaders understand how their brands appear across AI-assisted buyer research, including ChatGPT, Gemini, Perplexity and Google AI surfaces." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Rushdan Rosdi — AI Search & Visibility Specialist" />
+  <meta property="og:description" content="Rushdan Rosdi helps B2B marketing leaders understand how their brands appear across AI-assisted buyer research, including ChatGPT, Gemini, Perplexity and Google AI surfaces." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://rushdanrosdi.com/" />
+  <link rel="canonical" href="https://rushdanrosdi.com/" />
+  <style>
+:root {
+  --bg: #0b1220;
+  --card: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --soft: #94a3b8;
+  --accent: #38bdf8;
+  --accent-2: #a78bfa;
+  --max: 1080px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 30%),
+    radial-gradient(circle at top right, rgba(167, 139, 250, 0.18), transparent 34%),
+    var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+.page { min-height: 100vh; padding: 32px 20px; }
+.wrap { max-width: var(--max); margin: 0 auto; }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 0 56px;
+}
+.brand { font-weight: 800; letter-spacing: -0.03em; font-size: 20px; }
+.nav { display: flex; gap: 18px; color: var(--muted); font-size: 14px; flex-wrap: wrap; }
+.nav a:hover { color: var(--text); }
+.hero {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 32px;
+  align-items: center;
+  padding: 42px 0 56px;
+}
+.hero.single { grid-template-columns: 1fr; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.9);
+}
+h1 {
+  margin: 0;
+  max-width: 850px;
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+}
+.lead {
+  max-width: 760px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: clamp(18px, 2vw, 22px);
+}
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  border: 1px solid var(--card-border);
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #06111f;
+  border: 0;
+}
+.btn-secondary { background: rgba(255, 255, 255, 0.06); color: var(--text); }
+.panel, .card {
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(18px);
+}
+.panel {
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+.panel h2, .panel h3 { margin: 0 0 12px; letter-spacing: -0.03em; }
+.panel p, .card p, .card li { color: var(--muted); margin: 0; }
+.mini-list { display: grid; gap: 14px; margin-top: 22px; }
+.mini-item {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.mini-item strong { display: block; margin-bottom: 4px; }
+.mini-item span { color: var(--soft); font-size: 14px; }
+section { padding: 34px 0; }
+.section-title { max-width: 780px; margin-bottom: 22px; }
+.section-title h2 {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+.section-title p { margin: 0; color: var(--muted); font-size: 18px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.card { border-radius: 24px; padding: 22px; }
+.card h3 { margin: 0 0 10px; font-size: 20px; letter-spacing: -0.03em; }
+.card.highlight { background: linear-gradient(180deg, rgba(56, 189, 248, 0.11), rgba(255, 255, 255, 0.055)); }
+ul { padding-left: 18px; margin: 0; }
+li + li { margin-top: 6px; }
+.strip {
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 26px;
+  padding: 28px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.10), rgba(167, 139, 250, 0.08));
+}
+.steps { display: grid; gap: 14px; }
+.step {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 16px;
+  align-items: start;
+  border: 1px solid var(--card-border);
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.055);
+}
+.number {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 900; color: #06111f;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.step h3 { margin: 0 0 4px; letter-spacing: -0.03em; }
+.step p { margin: 0; color: var(--muted); }
+.faq { display: grid; gap: 12px; }
+details {
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.055);
+}
+summary { cursor: pointer; font-weight: 800; letter-spacing: -0.02em; }
+details p { color: var(--muted); margin: 12px 0 0; }
+.footer {
+  padding: 38px 0 10px;
+  color: var(--soft);
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  border-top: 1px solid var(--card-border);
+  margin-top: 28px;
+}
+.footer a { color: var(--muted); }
+.article {
+  max-width: 830px;
+}
+.article p {
+  color: var(--muted);
+  font-size: 18px;
+  margin: 0 0 18px;
+}
+.article h2 {
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin: 42px 0 12px;
+}
+@media (max-width: 900px) {
+  header { align-items: flex-start; flex-direction: column; padding-bottom: 32px; }
+  .hero, .grid, .grid-2 { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; }
+}
+</style>
+  
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rushdan Rosdi",
+  "url": "https://rushdanrosdi.com/",
+  "jobTitle": "AI Search & Visibility Specialist",
+  "description": "Rushdan Rosdi helps B2B marketing leaders understand how their brands appear across AI-assisted buyer research.",
+  "sameAs": ["https://coe.my/"]
+}
+</script>
+
+</head>
+<body>
+  <div class="page">
+    <div class="wrap">
+      <header>
+        <a class="brand" href="/">Rushdan Rosdi</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a href="/partner/">Partner</a>
+          <a href="/about/">About</a>
+          <a href="/#focus">Focus</a>
+          <a href="/#scan">Risk Scan</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+      </header>
+      
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> AI Search & Visibility Specialist</div>
+      <h1>Helping B2B teams understand how buyers find them through AI.</h1>
+      <p class="lead">
+        I help marketing leaders identify how their brand appears across AI-assisted buyer research —
+        including ChatGPT, Gemini, Perplexity, Google AI surfaces and emerging answer engines.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:rushdan@rushdanrosdi.com">Email Rushdan</a>
+        <a class="btn btn-secondary" href="/partner/">View Partner Edition</a>
+        <a class="btn btn-secondary" href="/about/">About Rushdan</a>
+      </div>
+    </div>
+    <aside class="panel" aria-label="Current focus">
+      <h2>Current focus</h2>
+      <p>
+        A practical diagnostic for B2B teams that need to know whether they are appearing,
+        missing or being misrepresented in AI-generated buyer research.
+      </p>
+      <div class="mini-list">
+        <div class="mini-item"><strong>AI Buyer Discovery</strong><span>See which brands AI systems recommend for commercial buyer questions.</span></div>
+        <div class="mini-item"><strong>AI Search / GEO Diagnostics</strong><span>Identify visibility gaps, citation patterns and message-accuracy risks.</span></div>
+        <div class="mini-item"><strong>90-Day Opportunity Map</strong><span>Prioritise website, content, authority and PR actions.</span></div>
+      </div>
+    </aside>
+  </section>
+
+  <section id="focus">
+    <div class="section-title">
+      <h2>Built for B2B marketing leaders and specialist partners.</h2>
+      <p>
+        The goal is not another dashboard. The goal is to understand how AI-assisted discovery
+        changes the way buyers shortlist vendors, compare options and interpret brand authority.
+      </p>
+    </div>
+    <div class="grid">
+      <div class="card"><h3>For Fractional CMOs</h3><p>Use AI visibility evidence to guide positioning, content, website and demand-generation priorities.</p></div>
+      <div class="card"><h3>For B2B SaaS & Tech</h3><p>Understand whether your brand enters the consideration set when buyers ask AI tools for options.</p></div>
+      <div class="card"><h3>For Agencies & Consultants</h3><p>Add a specialist AI discovery diagnostic without building an internal GEO team from scratch.</p></div>
+    </div>
+  </section>
+
+  <section id="scan">
+    <div class="section-title">
+      <h2>AI Buyer Discovery Risk Scan</h2>
+      <p>A fixed-scope scan for one client, one commercial category and a focused set of buyer questions.</p>
+    </div>
+    <div class="grid">
+      <div class="card"><h3>What it checks</h3><ul><li>Brand visibility in AI-assisted buyer research</li><li>Competitor recommendations and category shortlists</li><li>Sources and citations influencing AI answers</li><li>Message accuracy and positioning risks</li></ul></div>
+      <div class="card"><h3>What you receive</h3><ul><li>Executive summary</li><li>Evidence appendix</li><li>90-day action list</li><li>Private partner briefing</li></ul></div>
+      <div class="card"><h3>Best fit</h3><ul><li>B2B SaaS</li><li>Cybersecurity and enterprise tech</li><li>Manufacturing and industrial B2B</li><li>Professional and specialist services</li></ul></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="panel">
+      <h2>Contact</h2>
+      <p>For private partner discussions, AI visibility diagnostics or B2B buyer-discovery questions:</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:rushdan@rushdanrosdi.com">rushdan@rushdanrosdi.com</a>
+        <a class="btn btn-secondary" href="/partner/">Partner Edition</a>
+        <a class="btn btn-secondary" href="/about/">About</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+      <footer class="footer">
+        <span>© 2026 Rushdan Rosdi. All rights reserved.</span>
+        <span>AI Search · GEO · AI Visibility · B2B Discovery</span>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

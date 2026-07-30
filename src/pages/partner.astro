@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import CTA from '../components/CTA.astro';
+
+const title = 'AI Buyer Discovery Risk Scan — Partner Edition | Rushdan Rosdi';
+const description = 'A private AI visibility diagnostic for Fractional CMOs, consultants and specialist agencies working with B2B brands.';
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'AI Buyer Discovery Risk Scan — Partner Edition',
+  provider: { '@type': 'Person', name: 'Rushdan Rosdi', url: 'https://rushdanrosdi.com/' },
+  serviceType: 'AI Search and AI Visibility Diagnostic',
+  description,
+};
+---
+
+<BaseLayout {title} {description} {schema}>
+  <section class="hero hero--inner">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="signal-dot"></span>Partner Edition</p>
+      <h1>A specialist evidence layer for <em>partner-led B2B work.</em></h1>
+      <p class="lead">You keep the client relationship. I provide the AI visibility diagnostic, evidence and opportunity map behind the scenes or in a controlled partner format.</p>
+      <div class="button-row">
+        <a class="button button--primary" href="mailto:rushdan@rushdanrosdi.com?subject=AI%20Buyer%20Discovery%20Risk%20Scan">Request a private discussion <span aria-hidden="true">↗</span></a>
+        <a class="text-link" href="#process">See the process <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+    <aside class="partner-summary">
+      <p class="kicker">Engagement profile</p>
+      <dl>
+        <div><dt>Scope</dt><dd>One client, one category</dd></div>
+        <div><dt>Format</dt><dd>Partner-controlled</dd></div>
+        <div><dt>Output</dt><dd>Executive-ready evidence</dd></div>
+        <div><dt>Access</dt><dd>Public assets first</dd></div>
+      </dl>
+    </aside>
+  </section>
+
+  <Section
+    eyebrow="The commercial problem"
+    title="B2B buyers are no longer only searching on Google."
+    intro="They ask AI tools to shortlist vendors, compare approaches, evaluate trade-offs and identify credible providers. Most brands cannot see how those answers are formed."
+  >
+    <div class="card-grid">
+      <article class="card"><span class="card-index">01</span><h3>The hidden gap</h3><p>A company can look strong in traditional SEO and still be absent from AI-assisted research.</p></article>
+      <article class="card"><span class="card-index">02</span><h3>The trust risk</h3><p>AI systems can repeat outdated positioning, miss proof points or favour better-evidenced competitors.</p></article>
+      <article class="card"><span class="card-index">03</span><h3>The partner opportunity</h3><p>Use discovery evidence to sharpen strategy, content, website, PR and authority priorities.</p></article>
+    </div>
+  </Section>
+
+  <aside class="statement-strip">
+    <p class="kicker">A sharper question</p>
+    <p>Not “how do we rank?” but <strong>“when a buyer asks AI about this category, does the client enter the consideration set?”</strong></p>
+  </aside>
+
+  <Section
+    eyebrow="Deliverables"
+    title="Clear enough for executives. Detailed enough for action."
+  >
+    <div class="deliverables">
+      <article><span>01</span><div><h3>Executive summary</h3><p>The client’s AI discovery position, key risks and most important opportunities.</p></div></article>
+      <article><span>02</span><div><h3>Evidence appendix</h3><p>Query sets, observed outputs, competitor patterns, citations and message-accuracy findings.</p></div></article>
+      <article><span>03</span><div><h3>90-day action map</h3><p>Priorities across website, content, authority, PR, credibility signals and knowledge assets.</p></div></article>
+      <article><span>04</span><div><h3>Private partner briefing</h3><p>Interpretation and suggested next steps before anything is shared with the client.</p></div></article>
+    </div>
+  </Section>
+
+  <Section id="process" eyebrow="Process" title="How partner engagement works.">
+    <ol class="process-list">
+      <li><span>01</span><div><h3>Private fit check</h3><p>Identify one client category where AI discovery may affect buyer consideration.</p></div></li>
+      <li><span>02</span><div><h3>Scope the scan</h3><p>Agree the client, competitors, buyer questions, format and partner role.</p></div></li>
+      <li><span>03</span><div><h3>Run the diagnostic</h3><p>I perform the analysis and package the findings for executive use.</p></div></li>
+      <li><span>04</span><div><h3>Partner briefing</h3><p>You receive the findings and recommended next steps first.</p></div></li>
+    </ol>
+  </Section>
+
+  <Section eyebrow="Partner FAQ" title="Practical details." narrow>
+    <div class="faq">
+      <details><summary>Is this the same as SEO?</summary><p>No. The scan focuses on how AI systems answer buyer questions, mention brands, cite sources and build shortlists.</p></details>
+      <details><summary>Can the partner stay in front of the client?</summary><p>Yes. The default model is partner-controlled, either behind the scenes or through a planned joint briefing.</p></details>
+      <details><summary>Can this be white-labelled?</summary><p>Yes. The diagnostic can be structured as white-label or partner-branded depending on scope.</p></details>
+      <details><summary>Do you need access to client systems?</summary><p>Usually not for the initial scan. Public-facing assets and observed AI answers are enough to begin.</p></details>
+    </div>
+  </Section>
+
+  <CTA
+    eyebrow="Private partner discussion"
+    title="Add AI discovery evidence to your next B2B engagement."
+    text="For selected Fractional CMOs, consultants and specialist agencies."
+    primaryLabel="Email Rushdan"
+    primaryHref="mailto:rushdan@rushdanrosdi.com?subject=AI%20Buyer%20Discovery%20Risk%20Scan%20-%20Partner%20Discussion"
+    secondaryLabel="About Rushdan"
+    secondaryHref="/about/"
+  />
+</BaseLayout>

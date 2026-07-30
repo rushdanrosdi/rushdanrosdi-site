@@ -1,0 +1,16 @@
+---
+const startYear = 2026;
+const currentYear = new Date().getFullYear();
+const yearLabel = currentYear > startYear ? `${startYear}–${currentYear}` : `${startYear}`;
+---
+
+<footer class="site-footer">
+  <div>
+    <a class="footer-brand" href="/">Rushdan Rosdi</a>
+    <p>AI Search · GEO · AI Visibility · B2B Discovery</p>
+  </div>
+  <div class="footer-meta">
+    <a href="mailto:rushdan@rushdanrosdi.com">rushdan@rushdanrosdi.com</a>
+    <span>© {yearLabel} Rushdan Rosdi</span>
+  </div>
+</footer>

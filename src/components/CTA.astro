@@ -1,0 +1,35 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  text: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+const {
+  eyebrow = 'Start a conversation',
+  title,
+  text,
+  primaryLabel = 'Email Rushdan',
+  primaryHref = 'mailto:rushdan@rushdanrosdi.com',
+  secondaryLabel,
+  secondaryHref,
+} = Astro.props;
+---
+
+<aside class="cta-block">
+  <div>
+    <p class="kicker">{eyebrow}</p>
+    <h2>{title}</h2>
+    <p>{text}</p>
+  </div>
+  <div class="button-row">
+    <a class="button button--primary" href={primaryHref}>{primaryLabel}<span aria-hidden="true">↗</span></a>
+    {secondaryLabel && secondaryHref && (
+      <a class="button button--secondary" href={secondaryHref}>{secondaryLabel}</a>
+    )}
+  </div>
+</aside>
