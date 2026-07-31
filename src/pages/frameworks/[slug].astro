@@ -1,0 +1,85 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getReadingTime } from '../../utils/readingTime';
+
+export async function getStaticPaths() {
+  const frameworks = await getCollection('frameworks', ({ data }) => !data.draft);
+  return frameworks.map((framework) => ({
+    params: { slug: framework.data.canonicalSlug },
+    props: { framework },
+  }));
+}
+
+const { framework } = Astro.props;
+const { Content } = await render(framework);
+const canonicalPath = `/frameworks/${framework.data.canonicalSlug}/`;
+const canonicalUrl = new URL(canonicalPath, Astro.site).toString();
+const readingTime = getReadingTime(framework.body ?? '', framework.data.readingTime);
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: framework.data.title,
+  description: framework.data.description,
+  datePublished: framework.data.pubDate.toISOString(),
+  dateModified: (framework.data.updatedDate ?? framework.data.pubDate).toISOString(),
+  version: framework.data.version,
+  keywords: framework.data.tags,
+  author: {
+    '@type': 'Person',
+    name: 'Rushdan Rosdi',
+    url: new URL('/about/', Astro.site).toString(),
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'Rushdan Rosdi',
+    url: new URL('/', Astro.site).toString(),
+  },
+  mainEntityOfPage: canonicalUrl,
+  url: canonicalUrl,
+};
+---
+
+<BaseLayout
+  title={`${framework.data.title} | Rushdan Rosdi`}
+  description={framework.data.description}
+  {canonicalPath}
+  type="article"
+  publishedTime={framework.data.pubDate}
+  tags={framework.data.tags}
+  {schema}
+>
+  <article class="article-page">
+    <a class="back-link" href="/frameworks/">← All Frameworks</a>
+    <header class="article-header">
+      <p class="eyebrow"><span class="signal-dot"></span>Framework</p>
+      <h1>{framework.data.title}</h1>
+      <p class="lead">{framework.data.description}</p>
+      <div class="article-meta">
+        <span>Version {framework.data.version}</span>
+        <time datetime={framework.data.pubDate.toISOString()}>
+          Published {formatDate(framework.data.pubDate)}
+        </time>
+        {framework.data.updatedDate && (
+          <time datetime={framework.data.updatedDate.toISOString()}>
+            Updated {formatDate(framework.data.updatedDate)}
+          </time>
+        )}
+        <span>{readingTime} min read</span>
+        <a href="/about/" aria-label="About Rushdan">Rushdan Rosdi</a>
+      </div>
+      <ul class="article-tags" aria-label="Topics">
+        {framework.data.tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+    </header>
+    <div class="prose prose--article">
+      <Content />
+      <aside class="article-cta">
+        <p>Use this framework to examine how your brand appears inside AI-assisted buyer research through the <a href="/partner/">AI Buyer Discovery Risk Scan</a>.</p>
+      </aside>
+      <a class="back-link article-back-link" href="/frameworks/">Return to Frameworks</a>
+    </div>
+  </article>
+</BaseLayout>

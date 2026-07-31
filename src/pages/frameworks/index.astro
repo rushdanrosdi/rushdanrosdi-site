@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import { getReadingTime } from '../../utils/readingTime';
+
+const title = 'Frameworks | Rushdan Rosdi';
+const description = 'Practical frameworks for AI Search, B2B discovery and brand visibility.';
+const frameworks = (await getCollection('frameworks', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+---
+
+<BaseLayout {title} {description} canonicalPath="/frameworks/">
+  <section class="page-intro">
+    <p class="eyebrow"><span class="signal-dot"></span>Frameworks</p>
+    <h1>Practical models for <em>AI-era discovery.</em></h1>
+    <p class="lead">This section collects field-tested ways to assess inclusion, accuracy, authority and buyer relevance across AI-assisted research.</p>
+  </section>
+
+  <div class="lab-list">
+    {frameworks.map((framework, index) => (
+      <article class="note-row">
+        <div class="note-number">{String(index + 1).padStart(2, '0')}</div>
+        <div class="note-content">
+          <div class="note-meta">
+            <span>Version {framework.data.version}</span>
+            <time datetime={framework.data.pubDate.toISOString()}>
+              Published {formatDate(framework.data.pubDate)}
+            </time>
+            {framework.data.updatedDate && (
+              <time datetime={framework.data.updatedDate.toISOString()}>
+                Updated {formatDate(framework.data.updatedDate)}
+              </time>
+            )}
+            <span>{getReadingTime(framework.body ?? '', framework.data.readingTime)} min read</span>
+            {framework.data.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+          <h2><a href={`/frameworks/${framework.data.canonicalSlug}/`}>{framework.data.title}</a></h2>
+          <p>{framework.data.description}</p>
+        </div>
+        <a class="note-arrow" href={`/frameworks/${framework.data.canonicalSlug}/`} aria-label={`Read ${framework.data.title}`}>↗</a>
+      </article>
+    ))}
+  </div>
+
+  <CTA
+    title="Put the framework to work."
+    text="Start with an AI Buyer Discovery Risk Scan to see how your brand appears across buyer questions."
+    primaryLabel="Explore the Risk Scan"
+    primaryHref="/partner/"
+    secondaryLabel="Read Lab Notes"
+    secondaryHref="/lab/"
+  />
+</BaseLayout>
