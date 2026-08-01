@@ -1,0 +1,146 @@
+---
+interface Props {
+  researchStatus?: string;
+  releaseType?: string;
+  pubDate?: Date;
+  supports?: string[];
+  frameworkStages?: string[];
+}
+
+const {
+  researchStatus,
+  releaseType,
+  pubDate,
+  supports = [],
+  frameworkStages = [],
+} = Astro.props;
+
+const formatDate = (date?: Date) => {
+  if (!date) return "";
+  return new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(date);
+};
+
+const frameworkLinks: Record<string, string> = {
+  "AI Buyer Discovery Framework v1.0": "/frameworks/ai-buyer-discovery-framework/",
+};
+---
+
+<section class="research-footer" aria-label="Research metadata">
+  <div class="research-footer__label">Research Record</div>
+
+  <div class="research-footer__grid">
+    {researchStatus && (
+      <div>
+        <span>Status</span>
+        <strong>{researchStatus}</strong>
+      </div>
+    )}
+
+    {releaseType && (
+      <div>
+        <span>Release Type</span>
+        <strong>{releaseType}</strong>
+      </div>
+    )}
+
+    {pubDate && (
+      <div>
+        <span>Published</span>
+        <strong>{formatDate(pubDate)}</strong>
+      </div>
+    )}
+
+    {supports.length > 0 && (
+      <div>
+        <span>Supports</span>
+        <ul>
+          {supports.map((item) => (
+            <li>
+              {frameworkLinks[item] ? (
+                <a href={frameworkLinks[item]}>{item}</a>
+              ) : (
+                item
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    {frameworkStages.length > 0 && (
+      <div>
+        <span>Related Framework Stages</span>
+        <ul>
+          {frameworkStages.map((stage) => (
+            <li>{stage}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .research-footer {
+    margin-top: 4rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 1rem;
+    background: rgba(15, 23, 42, 0.45);
+  }
+
+  .research-footer__label {
+    margin-bottom: 1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #94a3b8;
+  }
+
+  .research-footer__grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .research-footer span {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+    color: #94a3b8;
+  }
+
+  .research-footer strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #e5e7eb;
+  }
+
+  .research-footer ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .research-footer li {
+    margin: 0.25rem 0;
+    color: #e5e7eb;
+  }
+
+  .research-footer a {
+    color: #93c5fd;
+    text-decoration: none;
+  }
+
+  .research-footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 720px) {
+    .research-footer__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

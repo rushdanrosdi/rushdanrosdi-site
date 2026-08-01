@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResearchFooter from '../../components/ResearchFooter.astro';
 import { getReadingTime } from '../../utils/readingTime';
 
 export async function getStaticPaths() {
@@ -44,6 +45,15 @@ const readingTime = getReadingTime(note.body ?? '', note.data.readingTime);
     </header>
     <div class="prose prose--article">
       <Content />
+
+      <ResearchFooter
+        researchStatus={note.data.researchStatus}
+        releaseType={note.data.releaseType}
+        pubDate={note.data.pubDate}
+        supports={note.data.supports}
+        frameworkStages={note.data.frameworkStages}
+      />
+
       <aside class="article-cta">
         <p>If you want to understand how your brand appears inside AI-assisted buyer research, start with the <a href="/partner/">AI Buyer Discovery Risk Scan</a>.</p>
       </aside>
