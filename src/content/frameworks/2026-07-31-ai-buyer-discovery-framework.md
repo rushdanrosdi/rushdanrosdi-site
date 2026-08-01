@@ -11,6 +11,12 @@ tags:
   - Buyer Discovery
   - Framework
 canonicalSlug: "ai-buyer-discovery-framework"
+
+supportedBy:
+  - "Lab #001"
+  - "Lab #002"
+  - "Lab #003"
+  - "Lab #004"
 ---
 
 ## Framework purpose

@@ -1,0 +1,158 @@
+---
+interface Props {
+  status?: string;
+  releaseType?: string;
+  pubDate?: Date;
+  updatedDate?: Date;
+  version?: string;
+  supportedBy?: string[];
+}
+
+const {
+  status,
+  releaseType,
+  pubDate,
+  updatedDate,
+  version,
+  supportedBy = [],
+} = Astro.props;
+
+const formatDate = (date?: Date) => {
+  if (!date) return "";
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+};
+
+const labLinks: Record<string, string> = {
+  "Lab #001": "/lab/your-brand-may-rank-in-google-and-still-be-invisible-in-ai/",
+  "Lab #002": "/lab/ai-search-is-not-one-prompt-it-is-a-pattern-across-buyer-questions/",
+  "Lab #003": "/lab/why-ai-visibility-audits-should-start-with-buyer-questions-not-keywords/",
+  "Lab #004": "/lab/why-ai-visibility-is-a-pattern-not-a-ranking-position/",
+};
+---
+
+<section class="framework-footer" aria-label="Framework release metadata">
+  <div class="framework-footer__label">Framework Record</div>
+
+  <div class="framework-footer__grid">
+    {status && (
+      <div>
+        <span>Status</span>
+        <strong>{status}</strong>
+      </div>
+    )}
+
+    {releaseType && (
+      <div>
+        <span>Release Type</span>
+        <strong>{releaseType}</strong>
+      </div>
+    )}
+
+    {version && (
+      <div>
+        <span>Version</span>
+        <strong>{version}</strong>
+      </div>
+    )}
+
+    {pubDate && (
+      <div>
+        <span>Released</span>
+        <strong>{formatDate(pubDate)}</strong>
+      </div>
+    )}
+
+    {updatedDate && (
+      <div>
+        <span>Last Updated</span>
+        <strong>{formatDate(updatedDate)}</strong>
+      </div>
+    )}
+
+    {supportedBy.length > 0 && (
+      <div class="framework-footer__wide">
+        <span>Supported By</span>
+        <ul>
+          {supportedBy.map((item) => (
+            <li>
+              {labLinks[item] ? (
+                <a href={labLinks[item]}>{item}</a>
+              ) : (
+                item
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .framework-footer {
+    margin-top: 4rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 1rem;
+    background: rgba(15, 23, 42, 0.45);
+  }
+
+  .framework-footer__label {
+    margin-bottom: 1rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #94a3b8;
+  }
+
+  .framework-footer__grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .framework-footer span {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+    color: #94a3b8;
+  }
+
+  .framework-footer strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #e5e7eb;
+  }
+
+  .framework-footer ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .framework-footer li {
+    margin: 0.25rem 0;
+    color: #e5e7eb;
+  }
+
+  .framework-footer a {
+    color: #93c5fd;
+    text-decoration: none;
+  }
+
+  .framework-footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 720px) {
+    .framework-footer__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .framework-footer__wide {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

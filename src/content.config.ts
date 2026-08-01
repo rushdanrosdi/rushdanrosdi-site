@@ -37,6 +37,10 @@ const frameworks = defineCollection({
       .string()
       .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Use a lowercase, hyphen-separated canonical slug.'),
     readingTime: z.number().int().positive().optional(),
+
+status: z.string().optional(),
+releaseType: z.string().optional(),
+supportedBy: z.array(z.string()).optional(),
   }),
 });
 

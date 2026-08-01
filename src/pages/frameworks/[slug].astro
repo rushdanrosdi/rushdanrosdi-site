@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FrameworkFooter from '../../components/FrameworkFooter.astro';
 import { getReadingTime } from '../../utils/readingTime';
 
 export async function getStaticPaths() {
@@ -79,6 +80,16 @@ const schema = {
       <aside class="article-cta">
         <p>Use this framework to examine how your brand appears inside AI-assisted buyer research through the <a href="/partner/">AI Buyer Discovery Risk Scan</a>.</p>
       </aside>
+
+      <FrameworkFooter
+        status={framework.data.status}
+        releaseType={framework.data.releaseType}
+        pubDate={framework.data.pubDate}
+        updatedDate={framework.data.updatedDate}
+        version={framework.data.version}
+        supportedBy={framework.data.supportedBy}
+      />
+
       <a class="back-link article-back-link" href="/frameworks/">Return to Frameworks</a>
     </div>
   </article>
