@@ -10,6 +10,15 @@ tags:
   - Buyer Discovery
   - B2B Marketing
 canonicalSlug: "your-brand-may-rank-in-google-and-still-be-invisible-in-ai"
+
+labNumber: "001"
+researchStatus: "Published"
+releaseType: "Lab Note"
+supports:
+  - "AI Buyer Discovery Framework v1.0"
+frameworkStages:
+  - "Entity Understanding"
+  - "Visibility Gap"
 ---
 
 A B2B company can have a technically sound website, rank for useful commercial terms and publish credible material — yet barely appear when a buyer asks an AI system which providers to consider.

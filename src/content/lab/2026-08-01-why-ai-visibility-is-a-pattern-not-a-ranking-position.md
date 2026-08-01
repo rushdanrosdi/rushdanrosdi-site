@@ -9,6 +9,15 @@ tags:
   - Buyer Discovery
   - GEO
 canonicalSlug: "why-ai-visibility-is-a-pattern-not-a-ranking-position"
+
+labNumber: "004"
+researchStatus: "Published"
+releaseType: "Lab Note"
+supports:
+  - "AI Buyer Discovery Framework v1.0"
+frameworkStages:
+  - "AI Response Observation"
+  - "Competitor Comparison"
 ---
 
 Traditional search analysis often asks:

@@ -10,6 +10,15 @@ tags:
   - Buyer Discovery
   - B2B Marketing
 canonicalSlug: "ai-search-is-not-one-prompt-it-is-a-pattern-across-buyer-questions"
+
+labNumber: "002"
+researchStatus: "Published"
+releaseType: "Lab Note"
+supports:
+  - "AI Buyer Discovery Framework v1.0"
+frameworkStages:
+  - "Prompt Set"
+  - "AI Response Observation"
 ---
 
 A common mistake in AI Search work is treating one answer from one AI system as if it represents the market.

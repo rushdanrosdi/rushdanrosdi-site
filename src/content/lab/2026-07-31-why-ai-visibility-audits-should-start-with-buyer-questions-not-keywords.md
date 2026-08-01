@@ -9,6 +9,15 @@ tags:
   - Buyer Discovery
   - GEO
 canonicalSlug: "why-ai-visibility-audits-should-start-with-buyer-questions-not-keywords"
+
+labNumber: "003"
+researchStatus: "Published"
+releaseType: "Lab Note"
+supports:
+  - "AI Buyer Discovery Framework v1.0"
+frameworkStages:
+  - "Buyer Questions"
+  - "Prompt Set"
 ---
 
 Traditional search audits usually begin with keywords.
