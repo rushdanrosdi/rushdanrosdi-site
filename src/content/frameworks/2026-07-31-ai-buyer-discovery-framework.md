@@ -2,7 +2,7 @@
 title: "AI Buyer Discovery Framework"
 description: "A research-driven framework for evaluating how a brand appears, is understood and is considered across AI-assisted buyer questions."
 pubDate: 2026-07-31
-updatedDate: 2026-08-08
+updatedDate: 2026-08-09
 version: "1.0"
 draft: false
 
@@ -26,6 +26,7 @@ supportedBy:
   - "Lab #009"
   - "Lab #010"
   - "Lab #011"
+  - "Lab #012"
 ---
 
 ## Framework purpose
