@@ -31,6 +31,7 @@ supportedBy:
   - "Lab #013"
   - "Lab #014"
   - "Lab #015"
+  - "Lab #016"
 ---
 
 ## Framework purpose
