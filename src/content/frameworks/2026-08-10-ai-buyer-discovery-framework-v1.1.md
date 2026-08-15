@@ -33,6 +33,7 @@ supportedBy:
   - "Lab #015"
   - "Lab #016"
   - "Lab #017"
+  - "Lab #018"
 ---
 
 ## Framework purpose
@@ -657,6 +658,7 @@ Version 1.1 is informed by the first thirteen public Lab Notes.
 
 - **Lab Note #008:** Why AI Visibility Audits Should End With Priority Actions, Not Observation Reports
 - **Lab Note #013:** Why AI Visibility Changes Need Re-Testing, Not Assumptions
+- **Lab Note #018:** Why AI Visibility Work Should Start With Leverage, Not Completeness
 
 ### Authority System extensions and coordination
 
