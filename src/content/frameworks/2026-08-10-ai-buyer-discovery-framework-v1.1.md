@@ -644,22 +644,26 @@ Version 1.1 is informed by the first thirteen public Lab Notes.
 - **Lab Note #004:** Why AI Visibility Is a Pattern, Not a Ranking Position
 - **Lab Note #005:** Why AI Visibility Audits Need Competitor Comparison, Not Just Brand Checks
 
-### Sources and entity understanding
+### Sources, evidence and entity understanding
 
 - **Lab Note #006:** Why Source Signals Shape How AI Describes Your Brand
 - **Lab Note #007:** Why AI Visibility Gaps Are Often Entity Understanding Gaps
 - **Lab Note #010:** Why Consistent Entity Signals Matter in AI-Assisted Discovery
+- **Lab Note #014:** Why AI Visibility Evidence Should Be Weighted, Not Just Counted
+- **Lab Note #016:** How Small Wording Shifts Can Change How AI Frames an Entity
+- **Lab Note #017:** Why Buyer-Aligned Proof Matters More Than Generic Authority Signals
 
 ### Visibility gaps, action and re-testing
 
 - **Lab Note #008:** Why AI Visibility Audits Should End With Priority Actions, Not Observation Reports
 - **Lab Note #013:** Why AI Visibility Changes Need Re-Testing, Not Assumptions
 
-### Authority System extensions and feedback inputs
+### Authority System extensions and coordination
 
 - **Lab Note #009:** Why Authority Is Built Between Articles, Not Inside Them
 - **Lab Note #011:** Why Distribution Is More Than Promotion in an Authority System
 - **Lab Note #012:** How Conversations Become Inputs for Future Authority Assets
+- **Lab Note #015:** Why AI Visibility Is Often a Coordination Problem, Not Just a Content Problem
 
 Lab Notes #009, #011 and #012 extend beyond the core diagnostic framework. They inform the broader Authority Systems layer around publishing, distribution, conversation and feedback.
 
