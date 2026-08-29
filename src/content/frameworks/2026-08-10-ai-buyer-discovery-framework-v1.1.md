@@ -34,6 +34,20 @@ supportedBy:
   - "Lab #016"
   - "Lab #017"
   - "Lab #018"
+  - "Lab #019"
+  - "Lab #020"
+  - "Lab #021"
+  - "Lab #022"
+  - "Lab #023"
+  - "Lab #024"
+  - "Lab #025"
+  - "Lab #026"
+  - "Lab #027"
+  - "Lab #028"
+  - "Lab #029"
+  - "Lab #030"
+  - "Lab #031"
+  - "Lab #032"
 ---
 
 ## Framework purpose
@@ -632,7 +646,7 @@ The value is the interpretation:
 
 ## Supporting research
 
-Version 1.1 is informed by the first thirteen public Lab Notes.
+Version 1.1 remains the current released methodology. Supporting research has continued through Lab Note #032. Later Lab Notes are recorded here as supporting or adjacent research and do not change the framework version until a methodology update is formally incorporated.
 
 ### Foundations: AI visibility and buyer questions
 
@@ -644,6 +658,9 @@ Version 1.1 is informed by the first thirteen public Lab Notes.
 
 - **Lab Note #004:** Why AI Visibility Is a Pattern, Not a Ranking Position
 - **Lab Note #005:** Why AI Visibility Audits Need Competitor Comparison, Not Just Brand Checks
+- **Lab Note #022:** Why Brand Mentions Should Be Separated From Recommendation Strength in AI Visibility Audits
+- **Lab Note #023:** Why AI Visibility Audits Should Capture Recommendation Reasons, Not Just Recommendation Strength
+- **Lab Note #024:** Why AI Visibility Audits Should Track Competitor Winning Reasons, Not Just Competitor Mentions
 
 ### Sources, evidence and entity understanding
 
@@ -653,12 +670,16 @@ Version 1.1 is informed by the first thirteen public Lab Notes.
 - **Lab Note #014:** Why AI Visibility Evidence Should Be Weighted, Not Just Counted
 - **Lab Note #016:** How Small Wording Shifts Can Change How AI Frames an Entity
 - **Lab Note #017:** Why Buyer-Aligned Proof Matters More Than Generic Authority Signals
+- **Lab Note #019:** Why Strong Evidence Should Be Reused Across Multiple Buyer Questions
+- **Lab Note #020:** Why AI Visibility Audits Need an Evidence Coverage Map, Not Just a Source List
 
-### Visibility gaps, action and re-testing
+### Visibility gaps, buyer stages, action and re-testing
 
 - **Lab Note #008:** Why AI Visibility Audits Should End With Priority Actions, Not Observation Reports
 - **Lab Note #013:** Why AI Visibility Changes Need Re-Testing, Not Assumptions
 - **Lab Note #018:** Why AI Visibility Work Should Start With Leverage, Not Completeness
+- **Lab Note #021:** Why AI Visibility Gaps Should Be Diagnosed by Buyer Stage, Not Overall Score
+- **Lab Note #025:** Why AI Visibility Audits Need a Buyer-Question-to-Action Trace
 
 ### Authority System extensions and coordination
 
@@ -667,7 +688,17 @@ Version 1.1 is informed by the first thirteen public Lab Notes.
 - **Lab Note #012:** How Conversations Become Inputs for Future Authority Assets
 - **Lab Note #015:** Why AI Visibility Is Often a Coordination Problem, Not Just a Content Problem
 
-Lab Notes #009, #011 and #012 extend beyond the core diagnostic framework. They inform the broader Authority Systems layer around publishing, distribution, conversation and feedback.
+### Authority System operations and publishing workflow
+
+- **Lab Note #026:** Why Authority Systems Need a Review Layer, Not Just a Publishing Layer
+- **Lab Note #027:** Why Authority Systems Need a Decision Log, Not Just a Content Calendar
+- **Lab Note #028:** Why Authority Systems Need an Asset Registry, Not Just a List of Published Pages
+- **Lab Note #029:** Why Authority Systems Need an Asset Lifecycle, Not Just a Publish Status
+- **Lab Note #030:** Why Authority Systems Need an Asset Relationship Map, Not Just an Asset Registry
+- **Lab Note #031:** Why Authority Systems Need a Source of Truth, Not Just Connected Assets
+- **Lab Note #032:** Why Authority Systems Need Change Propagation, Not Just a Source of Truth
+
+Lab Notes in the Authority System sections extend beyond the core diagnostic framework. They inform the broader operating layer around publishing, distribution, conversation, governance, asset management and feedback.
 
 ---
 
