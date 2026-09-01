@@ -13,6 +13,8 @@ const lab = defineCollection({
       .string()
       .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Use a lowercase, hyphen-separated canonical slug.'),
     readingTime: z.number().int().positive().optional(),
+    ogImage: z.string().optional(),
+    ogImageAlt: z.string().optional(),
 
 labNumber: z.string().optional(),
 researchStatus: z.string().optional(),
