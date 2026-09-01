@@ -25,6 +25,8 @@ const readingTime = getReadingTime(note.body ?? '', note.data.readingTime);
   type="article"
   publishedTime={note.data.pubDate}
   tags={note.data.tags}
+  socialImagePath={note.data.ogImage}
+  socialImageAlt={note.data.ogImageAlt ?? note.data.title}
 >
   <article class="article-page">
     <a class="back-link" href="/lab/">← All Lab Notes</a>
