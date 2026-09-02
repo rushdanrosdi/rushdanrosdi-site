@@ -1,4 +1,6 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -23,11 +25,20 @@ const {
   publishedTime,
   tags = [],
   schema,
-  socialImagePath = '/og.png',
+  socialImagePath,
   socialImageAlt = 'Rushdan Rosdi — AI Search & Visibility Specialist',
 } = Astro.props;
+
 const canonical = new URL(canonicalPath, Astro.site);
-const socialImage = new URL(socialImagePath, Astro.site);
+const requestedSocialImagePath = socialImagePath ?? '/og.png';
+const requestedLocalPath = requestedSocialImagePath.startsWith('/')
+  ? path.join(process.cwd(), 'public', requestedSocialImagePath.slice(1))
+  : null;
+const resolvedSocialImagePath =
+  requestedSocialImagePath === '/og.png' || (requestedLocalPath && fs.existsSync(requestedLocalPath))
+    ? requestedSocialImagePath
+    : '/og.png';
+const socialImage = new URL(resolvedSocialImagePath, Astro.site);
 ---
 
 <!doctype html>
