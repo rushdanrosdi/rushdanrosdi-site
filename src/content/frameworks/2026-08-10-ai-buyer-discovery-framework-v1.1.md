@@ -54,6 +54,8 @@ supportedBy:
   - "Lab #036"
   - "Lab #037"
   - "Lab #038"
+  - "Lab #039"
+  - "Lab #040"
 ---
 
 ## Framework purpose
@@ -652,7 +654,7 @@ The value is the interpretation:
 
 ## Supporting research
 
-Version 1.1 remains the current released methodology. Supporting research has continued through Lab Note #038. Later Lab Notes are recorded here as supporting or adjacent research and do not change the framework version until a methodology update is formally incorporated.
+Version 1.1 remains the current released methodology. Supporting research has continued through Lab Note #040. Later Lab Notes are recorded here as supporting or adjacent research and do not change the framework version until a methodology update is formally incorporated.
 
 ### Foundations: AI visibility and buyer questions
 
@@ -709,6 +711,8 @@ Version 1.1 remains the current released methodology. Supporting research has co
 - **Lab Note #036:** Why Authority Systems Need Root-Cause Analysis, Not Just a Remediation Queue
 - **Lab Note #037:** Why Authority Systems Need Preventive Controls, Not Just Corrective Actions
 - **Lab Note #038:** Why Authority Systems Need Control Effectiveness Monitoring, Not Just Preventive Controls
+- **Lab Note #039:** Why Authority Systems Need Control Drift Detection, Not Just Control Effectiveness Monitoring
+- **Lab Note #040:** Why Authority Systems Need Control Revalidation, Not Just Drift Detection
 
 Lab Notes in the Authority System sections extend beyond the core diagnostic framework. They inform the broader operating layer around publishing, distribution, conversation, governance, asset management and feedback.
 
