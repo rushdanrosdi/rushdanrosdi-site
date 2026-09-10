@@ -58,6 +58,8 @@ supportedBy:
   - "Lab #040"
   - "Lab #041"
   - "Lab #042"
+  - "Lab #043"
+  - "Lab #044"
 ---
 
 ## Framework purpose
@@ -656,7 +658,7 @@ The value is the interpretation:
 
 ## Supporting research
 
-Version 1.1 remains the current released methodology. Supporting research has continued through Lab Note #042. Later Lab Notes are recorded here as supporting or adjacent research and do not change the framework version until a methodology update is formally incorporated.
+Version 1.1 remains the current released methodology. Supporting research has continued through Lab Note #044. Later Lab Notes are recorded here as supporting or adjacent research and do not change the framework version until a methodology update is formally incorporated.
 
 ### Foundations: AI visibility and buyer questions
 
@@ -717,6 +719,8 @@ Version 1.1 remains the current released methodology. Supporting research has co
 - **Lab Note #040:** Why Authority Systems Need Control Revalidation, Not Just Drift Detection
 - **Lab Note #041:** Why Authority Systems Need Residual Risk Tracking, Not Just Control Revalidation
 - **Lab Note #042:** Why Authority Systems Need Risk Acceptance Authority, Not Just Residual Risk Tracking
+- **Lab Note #043:** Why Authority Systems Need Risk Acceptance Criteria, Not Just Risk Acceptance Authority
+- **Lab Note #044:** Why Authority Systems Need Risk Acceptance Review Triggers, Not Just Acceptance Criteria
 
 Lab Notes in the Authority System sections extend beyond the core diagnostic framework. They inform the broader operating layer around publishing, distribution, conversation, governance, asset management and feedback.
 
