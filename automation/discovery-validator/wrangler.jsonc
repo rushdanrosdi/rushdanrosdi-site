@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../node_modules/wrangler/config-schema.json",
+  "name": "rushdanrosdi-discovery-validator",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-13",
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "SITE_ORIGIN": "https://rushdanrosdi.com",
+    "ROBOTS_URL": "https://rushdanrosdi.com/robots.txt",
+    "SITEMAP_URL": "https://rushdanrosdi.com/sitemap-index.xml"
+  }
+}
