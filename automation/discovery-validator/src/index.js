@@ -1,6 +1,9 @@
 const DEFAULT_SITE = 'https://rushdanrosdi.com';
 const DEFAULT_SITEMAP = 'https://rushdanrosdi.com/sitemap-index.xml';
 const DEFAULT_ROBOTS = 'https://rushdanrosdi.com/robots.txt';
+const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow';
+const GOOGLE_TOKEN_ENDPOINT = 'https://oauth2.googleapis.com/token';
+const GOOGLE_SITEMAP_SCOPE = 'https://www.googleapis.com/auth/webmasters';
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data, null, 2), {
@@ -101,7 +104,7 @@ async function findInSitemap(targetUrl, sitemapUrl, depth = 0, seen = new Set())
   seen.add(sitemapUrl);
 
   const response = await fetch(sitemapUrl, {
-    headers: { 'user-agent': 'RushdanRosdi-DiscoveryValidator/1.0' },
+    headers: { 'user-agent': 'RushdanRosdi-DiscoveryValidator/2.0' },
   });
 
   const checked = [{ url: sitemapUrl, status: response.status }];
@@ -142,7 +145,7 @@ async function validate(target, env) {
   const expectedCanonical = normalizeUrl(targetUrl.toString());
   const pageResponse = await fetch(targetUrl.toString(), {
     redirect: 'follow',
-    headers: { 'user-agent': 'RushdanRosdi-DiscoveryValidator/1.0' },
+    headers: { 'user-agent': 'RushdanRosdi-DiscoveryValidator/2.0' },
   });
   const finalUrl = pageResponse.url || targetUrl.toString();
   const contentType = pageResponse.headers.get('content-type') || '';
@@ -150,7 +153,7 @@ async function validate(target, env) {
   const canonical = html ? extractCanonical(html, finalUrl) : null;
 
   const robotsUrl = env.ROBOTS_URL || DEFAULT_ROBOTS;
-  const robotsResponse = await fetch(robotsUrl, { headers: { 'user-agent': 'RushdanRosdi-DiscoveryValidator/1.0' } });
+  const robotsResponse = await fetch(robotsUrl, { headers: { 'user-agent': 'RushdanRosdi-DiscoveryValidator/2.0' } });
   const robotsText = robotsResponse.ok ? await robotsResponse.text() : '';
   const robotsResult = robotsResponse.ok
     ? robotsAllows(robotsText, targetUrl.pathname, '*')
@@ -174,14 +177,8 @@ async function validate(target, env) {
     finalUrl,
     checks,
     details: {
-      http: {
-        status: pageResponse.status,
-        contentType,
-      },
-      canonical: {
-        expected: expectedCanonical,
-        actual: canonical,
-      },
+      http: { status: pageResponse.status, contentType },
+      canonical: { expected: expectedCanonical, actual: canonical },
       robots: {
         url: robotsUrl,
         status: robotsResponse.status,
@@ -197,39 +194,242 @@ async function validate(target, env) {
   };
 }
 
+function base64Url(input) {
+  const bytes = typeof input === 'string' ? new TextEncoder().encode(input) : input;
+  let binary = '';
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+}
+
+function pemToArrayBuffer(pem) {
+  const normalized = pem.replace(/\\n/g, '\n');
+  const base64 = normalized
+    .replace('-----BEGIN PRIVATE KEY-----', '')
+    .replace('-----END PRIVATE KEY-----', '')
+    .replace(/\s+/g, '');
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+  return bytes.buffer;
+}
+
+async function getGoogleAccessToken(env) {
+  if (!env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !env.GOOGLE_PRIVATE_KEY) return null;
+
+  const now = Math.floor(Date.now() / 1000);
+  const header = base64Url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
+  const claim = base64Url(JSON.stringify({
+    iss: env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+    scope: GOOGLE_SITEMAP_SCOPE,
+    aud: GOOGLE_TOKEN_ENDPOINT,
+    iat: now,
+    exp: now + 3600,
+  }));
+  const unsigned = `${header}.${claim}`;
+
+  const key = await crypto.subtle.importKey(
+    'pkcs8',
+    pemToArrayBuffer(env.GOOGLE_PRIVATE_KEY),
+    { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
+    false,
+    ['sign'],
+  );
+  const signature = await crypto.subtle.sign(
+    'RSASSA-PKCS1-v1_5',
+    key,
+    new TextEncoder().encode(unsigned),
+  );
+  const assertion = `${unsigned}.${base64Url(new Uint8Array(signature))}`;
+
+  const tokenResponse = await fetch(GOOGLE_TOKEN_ENDPOINT, {
+    method: 'POST',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+      assertion,
+    }),
+  });
+
+  if (!tokenResponse.ok) {
+    const text = await tokenResponse.text();
+    throw new Error(`Google OAuth failed (${tokenResponse.status}): ${text.slice(0, 300)}`);
+  }
+
+  const data = await tokenResponse.json();
+  return data.access_token;
+}
+
+async function submitIndexNow(targetUrl, env) {
+  if (!env.INDEXNOW_KEY) {
+    return { configured: false, submitted: false, reason: 'INDEXNOW_KEY not configured' };
+  }
+
+  const target = new URL(targetUrl);
+  const payload = {
+    host: target.host,
+    key: env.INDEXNOW_KEY,
+    urlList: [targetUrl],
+  };
+  if (env.INDEXNOW_KEY_LOCATION) payload.keyLocation = env.INDEXNOW_KEY_LOCATION;
+
+  const response = await fetch(INDEXNOW_ENDPOINT, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json; charset=utf-8' },
+    body: JSON.stringify(payload),
+  });
+
+  return {
+    configured: true,
+    submitted: response.status === 200 || response.status === 202,
+    status: response.status,
+    accepted: response.status === 200 || response.status === 202,
+    response: (await response.text()).slice(0, 500),
+  };
+}
+
+async function submitGoogleSitemap(accessToken, env) {
+  if (!accessToken || !env.GSC_SITE_URL) {
+    return { configured: false, submitted: false, reason: 'Google Search Console credentials/site not configured' };
+  }
+
+  const sitemapUrl = env.SITEMAP_URL || DEFAULT_SITEMAP;
+  const endpoint = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(env.GSC_SITE_URL)}/sitemaps/${encodeURIComponent(sitemapUrl)}`;
+  const response = await fetch(endpoint, {
+    method: 'PUT',
+    headers: { authorization: `Bearer ${accessToken}` },
+  });
+
+  return {
+    configured: true,
+    submitted: response.ok,
+    status: response.status,
+    response: (await response.text()).slice(0, 500),
+  };
+}
+
+async function inspectGoogleUrl(targetUrl, accessToken, env) {
+  if (!accessToken || !env.GSC_SITE_URL) {
+    return { configured: false, inspected: false, reason: 'Google Search Console credentials/site not configured' };
+  }
+
+  const response = await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect', {
+    method: 'POST',
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      'content-type': 'application/json; charset=utf-8',
+    },
+    body: JSON.stringify({
+      inspectionUrl: targetUrl,
+      siteUrl: env.GSC_SITE_URL,
+      languageCode: 'en-US',
+    }),
+  });
+
+  const raw = await response.text();
+  let data = null;
+  try { data = raw ? JSON.parse(raw) : null; } catch { data = null; }
+  const index = data?.inspectionResult?.indexStatusResult;
+
+  return {
+    configured: true,
+    inspected: response.ok,
+    status: response.status,
+    verdict: index?.verdict || null,
+    coverageState: index?.coverageState || null,
+    indexingState: index?.indexingState || null,
+    robotsTxtState: index?.robotsTxtState || null,
+    pageFetchState: index?.pageFetchState || null,
+    lastCrawlTime: index?.lastCrawlTime || null,
+    googleCanonical: index?.googleCanonical || null,
+    userCanonical: index?.userCanonical || null,
+    inspectionResultLink: data?.inspectionResult?.inspectionResultLink || null,
+    error: response.ok ? null : raw.slice(0, 500),
+  };
+}
+
+function authorized(request, env) {
+  if (!env.ADMIN_TOKEN) return false;
+  return request.headers.get('authorization') === `Bearer ${env.ADMIN_TOKEN}`;
+}
+
+async function readTarget(request, requestUrl) {
+  let target = requestUrl.searchParams.get('url');
+  if (request.method === 'POST') {
+    const body = await request.json();
+    target = body.url || target;
+  }
+  return target;
+}
+
 export default {
   async fetch(request, env) {
     const requestUrl = new URL(request.url);
 
     if (request.method === 'GET' && requestUrl.pathname === '/health') {
-      return json({ ok: true, service: 'rushdanrosdi-discovery-validator', phase: '2A' });
+      return json({
+        ok: true,
+        service: 'rushdanrosdi-discovery-validator',
+        phase: '2B',
+        features: {
+          validation: true,
+          indexNow: Boolean(env.INDEXNOW_KEY),
+          googleSearchConsole: Boolean(env.GOOGLE_SERVICE_ACCOUNT_EMAIL && env.GOOGLE_PRIVATE_KEY && env.GSC_SITE_URL),
+        },
+      });
+    }
+
+    if (requestUrl.pathname === '/discover') {
+      if (request.method !== 'POST') return json({ ok: false, error: 'POST required.' }, 405);
+      if (!authorized(request, env)) return json({ ok: false, error: 'Unauthorized.' }, 401);
+
+      try {
+        const target = await readTarget(request, requestUrl);
+        if (!target) return json({ ok: false, error: 'Missing url.' }, 400);
+
+        const validation = await validate(target, env);
+        if (!validation.ok) {
+          return json({ ok: false, stage: 'validation', validation }, 422);
+        }
+
+        const accessToken = await getGoogleAccessToken(env);
+        const [indexNow, gscSitemap, googleInspection] = await Promise.all([
+          submitIndexNow(validation.target, env),
+          submitGoogleSitemap(accessToken, env),
+          inspectGoogleUrl(validation.target, accessToken, env),
+        ]);
+
+        return json({
+          ok: validation.ok && (!indexNow.configured || indexNow.submitted) && (!gscSitemap.configured || gscSitemap.submitted),
+          phase: '2B',
+          processedAt: new Date().toISOString(),
+          target: validation.target,
+          validation,
+          discovery: {
+            indexNow,
+            google: {
+              sitemap: gscSitemap,
+              inspection: googleInspection,
+              note: 'URL Inspection reports the Google-indexed version/status; it is not a live indexing submission endpoint.',
+            },
+          },
+        });
+      } catch (error) {
+        return json({ ok: false, error: error instanceof Error ? error.message : String(error) }, 400);
+      }
     }
 
     if (!['GET', 'POST'].includes(request.method)) {
       return json({ ok: false, error: 'Method not allowed' }, 405);
     }
 
-    let target = requestUrl.searchParams.get('url');
-    if (request.method === 'POST') {
-      try {
-        const body = await request.json();
-        target = body.url || target;
-      } catch {
-        return json({ ok: false, error: 'POST body must be valid JSON.' }, 400);
-      }
-    }
-
-    if (!target) {
-      return json(
-        {
+    try {
+      const target = await readTarget(request, requestUrl);
+      if (!target) {
+        return json({
           ok: false,
           error: 'Missing url. Use ?url=https://rushdanrosdi.com/.../ or POST {"url":"..."}.',
-        },
-        400,
-      );
-    }
-
-    try {
+        }, 400);
+      }
       return json(await validate(target, env));
     } catch (error) {
       return json({ ok: false, error: error instanceof Error ? error.message : String(error) }, 400);
