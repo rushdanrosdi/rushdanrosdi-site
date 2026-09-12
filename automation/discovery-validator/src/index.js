@@ -347,6 +347,71 @@ async function inspectGoogleUrl(targetUrl, accessToken, env) {
   };
 }
 
+async function persistDiscoveryRun(env, result) {
+  if (!env.DISCOVERY_DB) return { configured: false, stored: false, reason: 'DISCOVERY_DB binding not configured' };
+
+  const validation = result.validation;
+  const indexNow = result.discovery.indexNow;
+  const gsc = result.discovery.google.sitemap;
+  const inspection = result.discovery.google.inspection;
+
+  const write = await env.DISCOVERY_DB.prepare(`
+    INSERT INTO discovery_runs (
+      brand, url, processed_at, validation_ok, http_status, canonical_ok, robots_ok, sitemap_ok,
+      indexnow_submitted, indexnow_status, gsc_sitemap_submitted, gsc_sitemap_status,
+      google_verdict, google_coverage_state, google_indexing_state, google_last_crawl_time, result_json
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `).bind(
+    'rushdanrosdi',
+    result.target,
+    result.processedAt,
+    validation.ok ? 1 : 0,
+    validation.details.http.status ?? null,
+    validation.checks.canonical ? 1 : 0,
+    validation.checks.robots ? 1 : 0,
+    validation.checks.sitemap ? 1 : 0,
+    indexNow.configured ? (indexNow.submitted ? 1 : 0) : null,
+    indexNow.status ?? null,
+    gsc.configured ? (gsc.submitted ? 1 : 0) : null,
+    gsc.status ?? null,
+    inspection.verdict ?? null,
+    inspection.coverageState ?? null,
+    inspection.indexingState ?? null,
+    inspection.lastCrawlTime ?? null,
+    JSON.stringify(result),
+  ).run();
+
+  return { configured: true, stored: true, id: write.meta?.last_row_id ?? null };
+}
+
+async function latestStatus(env, targetUrl) {
+  if (!env.DISCOVERY_DB) return { configured: false, reason: 'DISCOVERY_DB binding not configured' };
+  const target = normalizeUrl(targetUrl);
+  const row = await env.DISCOVERY_DB.prepare(`
+    SELECT id, brand, url, processed_at, validation_ok, http_status, canonical_ok, robots_ok, sitemap_ok,
+           indexnow_submitted, indexnow_status, gsc_sitemap_submitted, gsc_sitemap_status,
+           google_verdict, google_coverage_state, google_indexing_state, google_last_crawl_time
+    FROM discovery_runs
+    WHERE url = ?
+    ORDER BY processed_at DESC
+    LIMIT 1
+  `).bind(target).first();
+  return { configured: true, found: Boolean(row), latest: row || null };
+}
+
+async function recentRuns(env, limit) {
+  if (!env.DISCOVERY_DB) return { configured: false, reason: 'DISCOVERY_DB binding not configured' };
+  const safeLimit = Math.min(Math.max(Number(limit) || 20, 1), 100);
+  const result = await env.DISCOVERY_DB.prepare(`
+    SELECT id, brand, url, processed_at, validation_ok, indexnow_submitted,
+           gsc_sitemap_submitted, google_verdict, google_coverage_state, google_last_crawl_time
+    FROM discovery_runs
+    ORDER BY processed_at DESC
+    LIMIT ?
+  `).bind(safeLimit).all();
+  return { configured: true, results: result.results || [] };
+}
+
 function authorized(request, env) {
   if (!env.ADMIN_TOKEN) return false;
   return request.headers.get('authorization') === `Bearer ${env.ADMIN_TOKEN}`;
@@ -369,13 +434,36 @@ export default {
       return json({
         ok: true,
         service: 'rushdanrosdi-discovery-validator',
-        phase: '2B',
+        phase: '2C',
         features: {
           validation: true,
           indexNow: Boolean(env.INDEXNOW_KEY),
           googleSearchConsole: Boolean(env.GOOGLE_SERVICE_ACCOUNT_EMAIL && env.GOOGLE_PRIVATE_KEY && env.GSC_SITE_URL),
+          discoveryLog: Boolean(env.DISCOVERY_DB),
         },
       });
+    }
+
+    if (requestUrl.pathname === '/status') {
+      if (request.method !== 'GET') return json({ ok: false, error: 'GET required.' }, 405);
+      if (!authorized(request, env)) return json({ ok: false, error: 'Unauthorized.' }, 401);
+      const target = requestUrl.searchParams.get('url');
+      if (!target) return json({ ok: false, error: 'Missing url.' }, 400);
+      try {
+        return json({ ok: true, ...(await latestStatus(env, target)) });
+      } catch (error) {
+        return json({ ok: false, error: error instanceof Error ? error.message : String(error) }, 400);
+      }
+    }
+
+    if (requestUrl.pathname === '/runs') {
+      if (request.method !== 'GET') return json({ ok: false, error: 'GET required.' }, 405);
+      if (!authorized(request, env)) return json({ ok: false, error: 'Unauthorized.' }, 401);
+      try {
+        return json({ ok: true, ...(await recentRuns(env, requestUrl.searchParams.get('limit'))) });
+      } catch (error) {
+        return json({ ok: false, error: error instanceof Error ? error.message : String(error) }, 400);
+      }
     }
 
     if (requestUrl.pathname === '/discover') {
@@ -398,9 +486,9 @@ export default {
           inspectGoogleUrl(validation.target, accessToken, env),
         ]);
 
-        return json({
+        const result = {
           ok: validation.ok && (!indexNow.configured || indexNow.submitted) && (!gscSitemap.configured || gscSitemap.submitted),
-          phase: '2B',
+          phase: '2C',
           processedAt: new Date().toISOString(),
           target: validation.target,
           validation,
@@ -412,7 +500,10 @@ export default {
               note: 'URL Inspection reports the Google-indexed version/status; it is not a live indexing submission endpoint.',
             },
           },
-        });
+        };
+
+        const storage = await persistDiscoveryRun(env, result);
+        return json({ ...result, storage });
       } catch (error) {
         return json({ ok: false, error: error instanceof Error ? error.message : String(error) }, 400);
       }
