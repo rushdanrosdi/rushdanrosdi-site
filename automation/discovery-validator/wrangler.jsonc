@@ -10,5 +10,13 @@
     "SITE_ORIGIN": "https://rushdanrosdi.com",
     "ROBOTS_URL": "https://rushdanrosdi.com/robots.txt",
     "SITEMAP_URL": "https://rushdanrosdi.com/sitemap-index.xml"
-  }
+  },
+  "d1_databases": [
+    {
+      "binding": "DISCOVERY_DB",
+      "database_name": "rushdanrosdi-discovery",
+      "database_id": "883722cf-fe99-46df-8935-768695301bb3",
+      "migrations_dir": "migrations"
+    }
+  ]
 }
