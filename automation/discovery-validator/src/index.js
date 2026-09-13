@@ -430,6 +430,20 @@ export default {
   async fetch(request, env) {
     const requestUrl = new URL(request.url);
 
+if (request.method === 'GET' && requestUrl.pathname === '/debug-auth') {
+  const authHeader = request.headers.get('authorization');
+
+  return json({
+    ok: true,
+    adminTokenConfigured: Boolean(env.ADMIN_TOKEN),
+    adminTokenLength: env.ADMIN_TOKEN ? env.ADMIN_TOKEN.length : 0,
+    authorizationHeaderPresent: Boolean(authHeader),
+    authorizationHeaderLength: authHeader ? authHeader.length : 0,
+    bearerPrefixPresent: authHeader ? authHeader.startsWith('Bearer ') : false,
+    exactMatch: authHeader === `Bearer ${env.ADMIN_TOKEN}`,
+  });
+}
+
     if (request.method === 'GET' && requestUrl.pathname === '/health') {
       return json({
         ok: true,
