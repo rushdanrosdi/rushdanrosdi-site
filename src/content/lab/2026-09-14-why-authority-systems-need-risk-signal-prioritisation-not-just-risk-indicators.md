@@ -194,3 +194,102 @@ Distance Beyond Tolerance
 A small deviation may require investigation.
 
 A large deviation may require immediate action.
+
+## Trend matters too
+
+A signal can be inside tolerance and still deserve attention.
+
+For example:
+
+```text
+Week 1: 99%
+Week 2: 98%
+Week 3: 97%
+Week 4: 96%
+```
+
+Tolerance is:
+
+```text
+95%
+```
+
+Technically, the indicator is still inside the boundary.
+
+But the trend is clearly deteriorating.
+
+Another indicator may be:
+
+```text
+Current: 93%
+Previous: 93%
+Previous: 93%
+```
+
+Outside tolerance, but stable.
+
+Which one deserves attention first?
+
+The answer may not always be obvious.
+
+This is why current state alone is not enough.
+
+## Rate of deterioration can be a priority signal
+
+A useful concept may be:
+
+```text
+Current Severity
++
+Rate of Change
+```
+
+For example:
+
+```text
+Risk A:
+High severity
+Stable
+
+Risk B:
+Moderate severity
+Deteriorating rapidly
+```
+
+Risk B may deserve earlier intervention than its current severity suggests.
+
+This is especially relevant in systems where failure can propagate quickly.
+
+## Confidence matters
+
+Not every signal is equally reliable.
+
+For example:
+
+```text
+Signal:
+One AI answer omitted the brand
+```
+
+Confidence may be low.
+
+But:
+
+```text
+Signal:
+Recommendation strength declined across
+three consecutive weekly scans
+on five high-value buyer questions
+```
+
+Confidence is much higher.
+
+So prioritisation should consider:
+
+```text
+Signal Confidence
+```
+
+A weak signal with high consequence may justify investigation.
+
+A strong signal with high consequence may justify immediate escalation.
