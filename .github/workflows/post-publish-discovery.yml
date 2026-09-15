@@ -12,6 +12,11 @@ on:
         description: 'Optional production URL to run through discovery manually'
         required: false
         type: string
+      include_indexnow:
+        description: 'Also submit to IndexNow'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -28,6 +33,7 @@ jobs:
       SITE_ORIGIN: https://rushdanrosdi.com
       VALIDATOR_BASE: https://rushdanrosdi-discovery-validator.webdesignseo2u.workers.dev
       ADMIN_TOKEN: ${{ secrets.DISCOVERY_ADMIN_TOKEN }}
+      INCLUDE_INDEXNOW: ${{ inputs.include_indexnow || 'false' }}
 
     steps:
       - name: Checkout repository
@@ -69,9 +75,7 @@ jobs:
               case "$file" in
                 src/content/*.md|src/content/*.mdx|src/content/*/*.md|src/content/*/*.mdx|src/content/*/*/*.md|src/content/*/*/*.mdx)
                   ;;
-                *)
-                  continue
-                  ;;
+                *) continue ;;
               esac
 
               relative="${file#src/content/}"
@@ -91,7 +95,6 @@ jobs:
           fi
 
           sort -u /tmp/discovery-urls.txt -o /tmp/discovery-urls.txt
-
           if [ ! -s /tmp/discovery-urls.txt ]; then
             echo "No production content URLs detected; nothing to submit."
             echo "has_urls=false" >> "$GITHUB_OUTPUT"
@@ -109,6 +112,12 @@ jobs:
           set -euo pipefail
           overall_failure=0
 
+          if [ "${INCLUDE_INDEXNOW}" = "true" ]; then
+            echo "Discovery mode: Google/GSC + IndexNow"
+          else
+            echo "Discovery mode: Google/GSC only (IndexNow skipped)"
+          fi
+
           while IFS= read -r url; do
             [ -z "$url" ] && continue
             echo "Processing: $url"
@@ -116,8 +125,6 @@ jobs:
             encoded=$(python3 -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=""))' "$url")
             validation_ok=false
 
-            # Cloudflare Pages can finish after the GitHub push. Poll validation only;
-            # do not trigger IndexNow/GSC repeatedly while waiting for deployment.
             for attempt in $(seq 1 20); do
               validation=$(curl -sS --max-time 30 "${VALIDATOR_BASE}/?url=${encoded}" || true)
               if [ "$(printf '%s' "$validation" | jq -r '.ok // false' 2>/dev/null)" = "true" ]; then
@@ -135,7 +142,7 @@ jobs:
               continue
             fi
 
-            payload=$(jq -nc --arg url "$url" '{url:$url}')
+            payload=$(jq -nc --arg url "$url" --argjson includeIndexNow "${INCLUDE_INDEXNOW}" '{url:$url, includeIndexNow:$includeIndexNow}')
             response=$(curl -sS --max-time 90 \
               -X POST "${VALIDATOR_BASE}/discover" \
               -H 'Content-Type: application/json' \
@@ -149,7 +156,7 @@ jobs:
             inspection_pass=$(printf '%s' "$response" | jq -r '.discovery.google.inspection.inspected // false' 2>/dev/null)
             storage_pass=$(printf '%s' "$response" | jq -r '.storage.stored // false' 2>/dev/null)
             indexnow_submitted=$(printf '%s' "$response" | jq -r '.discovery.indexNow.submitted // false' 2>/dev/null)
-            indexnow_status=$(printf '%s' "$response" | jq -r '.discovery.indexNow.status // "n/a"' 2>/dev/null)
+            indexnow_status=$(printf '%s' "$response" | jq -r '.discovery.indexNow.status // "skipped"' 2>/dev/null)
             google_coverage=$(printf '%s' "$response" | jq -r '.discovery.google.inspection.coverageState // "unknown"' 2>/dev/null)
 
             {
@@ -159,17 +166,18 @@ jobs:
               echo "- Google URL Inspection: $inspection_pass"
               echo "- Google coverage: $google_coverage"
               echo "- D1 stored: $storage_pass"
-              echo "- IndexNow submitted: $indexnow_submitted (HTTP $indexnow_status)"
+              if [ "${INCLUDE_INDEXNOW}" = "true" ]; then
+                echo "- IndexNow requested: yes"
+                echo "- IndexNow submitted: $indexnow_submitted (HTTP $indexnow_status)"
+              else
+                echo "- IndexNow requested: no — skipped"
+              fi
             } >> "$GITHUB_STEP_SUMMARY"
 
-            # IndexNow is best-effort and explicitly non-blocking. A 429 or other
-            # IndexNow failure must not stop daily publishing/discovery operations.
-            if [ "$indexnow_submitted" != "true" ]; then
+            if [ "${INCLUDE_INDEXNOW}" = "true" ] && [ "$indexnow_submitted" != "true" ]; then
               echo "::warning::IndexNow did not accept $url (HTTP $indexnow_status). Continuing because IndexNow is non-blocking."
             fi
 
-            # Core Level 2 success = production validation + Google submission /
-            # observability + D1 logging. IndexNow is deliberately excluded.
             if [ "$validation_pass" != "true" ] || \
                [ "$gsc_pass" != "true" ] || \
                [ "$inspection_pass" != "true" ] || \
