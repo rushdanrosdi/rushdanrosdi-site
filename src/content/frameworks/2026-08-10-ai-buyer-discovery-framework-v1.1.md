@@ -65,6 +65,7 @@ supportedBy:
   - "Lab #047"
   - "Lab #048"
   - "Lab #049"
+  - "Lab #050"
 ---
 
 ## Framework purpose
@@ -663,7 +664,7 @@ The value is the interpretation:
 
 ## Supporting research
 
-Version 1.1 remains the current released methodology. Supporting research has continued through Lab Note #049. Later Lab Notes are recorded here as supporting or adjacent research and do not change the framework version until a methodology update is formally incorporated.
+Version 1.1 remains the current released methodology. Supporting research has continued through Lab Note #050. Later Lab Notes are recorded here as supporting or adjacent research and do not change the framework version until a methodology update is formally incorporated.
 
 ### Foundations: AI visibility and buyer questions
 
@@ -731,6 +732,7 @@ Version 1.1 remains the current released methodology. Supporting research has co
 - **Lab Note #047:** Why Authority Systems Need Risk Signal Prioritisation, Not Just Risk Indicators
 - **Lab Note #048:** Why Authority Systems Need Escalation Rules, Not Just Risk Signal Prioritisation
 - **Lab Note #049:** Why Authority Systems Need Escalation Evidence Packages, Not Just Escalation Rules
+- **Lab Note #050:** Why Authority Systems Need Evidence Sufficiency Criteria, Not Just Escalation Evidence Packages
 
 Lab Notes in the Authority System sections extend beyond the core diagnostic framework. They inform the broader operating layer around publishing, distribution, conversation, governance, asset management and feedback.
 
