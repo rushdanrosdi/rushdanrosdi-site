@@ -71,6 +71,7 @@ supportedBy:
   - "Lab #053"
   - "Lab #054"
   - "Lab #055"
+  - "Lab #056"
 ---
 
 ## Framework purpose
@@ -669,7 +670,7 @@ The value is the interpretation:
 
 ## Supporting research
 
-Version 1.1 remains the current released methodology. Supporting research has continued through Lab Note #055. Later Lab Notes are recorded here as supporting or adjacent research and do not change the framework version until a methodology update is formally incorporated.
+Version 1.1 remains the current released methodology. Supporting research has continued through Lab Note #056. Later Lab Notes are recorded here as supporting or adjacent research and do not change the framework version until a methodology update is formally incorporated.
 
 ### Foundations: AI visibility and buyer questions
 
@@ -743,6 +744,7 @@ Version 1.1 remains the current released methodology. Supporting research has co
 - **Lab Note #053:** Why Authority Systems Need Governance Change Effectiveness Reviews, Not Just Governance Change Control
 - **Lab Note #054:** Why Authority Systems Need Governance Performance Indicators, Not Just Governance Change Effectiveness Reviews
 - **Lab Note #055:** Why Authority Systems Need Governance Performance Baselines, Not Just Governance Performance Indicators
+- **Lab Note #056:** Why Authority Systems Need Governance Performance Tolerance Thresholds, Not Just Governance Performance Baselines
 
 Lab Notes in the Authority System sections extend beyond the core diagnostic framework. They inform the broader operating layer around publishing, distribution, conversation, governance, asset management and feedback.
 
