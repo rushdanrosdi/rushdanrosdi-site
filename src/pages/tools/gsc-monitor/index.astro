@@ -1,0 +1,23 @@
+---
+import GscMonitorLayout from '../../../layouts/GscMonitorLayout.astro';
+---
+
+<GscMonitorLayout title="Read-only indexing monitoring" description="A private tool for monitoring and reporting on the indexing status of authorized Google Search Console properties." canonicalPath="/tools/gsc-monitor/" page="home">
+  <p class="monitor-status"><strong>Private use · Setup in progress.</strong> The monitoring engine is prepared for deployment. These public pages provide application and OAuth information; they do not provide public registration or Google sign-in.</p>
+  <h2>Purpose</h2>
+  <p>Rushdan Indexing Monitor helps Rushdan Rosdi review indexing changes for websites he owns or is authorized to monitor. Google Search Console data is used only for authorized indexing monitoring and reporting.</p>
+  <h2>What the engine is designed to do</h2>
+  <ul>
+    <li>Discover website URLs from public sitemaps and read their Google URL Inspection results.</li>
+    <li>Store indexing snapshots in Cloudflare D1 for reports and comparisons, including coverage, canonical URLs and last crawl dates.</li>
+    <li>Check public HTTP responses, robots directives and canonical tags separately from Google's index results.</li>
+    <li>Identify URLs for a human to review in Search Console. Request Indexing remains manual.</li>
+  </ul>
+  <p>The engine supports separate configurations for multiple properties. Each property needs appropriate Google authorization and configuration; permission is not assumed for every website.</p>
+  <h2>Why Google access is needed</h2>
+  <p>The application requests <code>https://www.googleapis.com/auth/webmasters.readonly</code> to check available Search Console properties and read URL Inspection results for the configured property. This permission can cover properties available to the consenting account; the engine checks the exact configured property before inspection.</p>
+  <p>It does not modify Search Console settings, submit indexing requests or request access to Gmail, Google Drive or contacts. Google results describe the version in Google's index and may not reflect a website's current live state.</p>
+  <h2>Your data and choices</h2>
+  <p>Read the <a href="/tools/gsc-monitor/privacy/">privacy policy</a> for storage, retention, access, revocation and deletion details, and the <a href="/tools/gsc-monitor/terms/">terms of use</a> for service limitations. You can revoke Google access at any time through your <a href="https://myaccount.google.com/connections">Google Account connections</a>.</p>
+  <p>This is an independent application, not a Google product or an endorsement by Google. Its use of Google API data is subject to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>.</p>
+</GscMonitorLayout>

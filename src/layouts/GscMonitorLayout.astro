@@ -1,0 +1,52 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  page: 'home' | 'privacy' | 'terms';
+}
+const { title, description, canonicalPath, page } = Astro.props;
+const links = [
+  { page: 'home', label: 'Application', href: '/tools/gsc-monitor/' },
+  { page: 'privacy', label: 'Privacy policy', href: '/tools/gsc-monitor/privacy/' },
+  { page: 'terms', label: 'Terms of use', href: '/tools/gsc-monitor/terms/' },
+];
+---
+
+<BaseLayout title={`${title} — Rushdan Indexing Monitor`} description={description} canonicalPath={canonicalPath} noindex>
+  <article class="monitor-page">
+    <nav class="monitor-nav" aria-label="Application information">
+      {links.map((link) => <a href={link.href} aria-current={page === link.page ? 'page' : undefined}>{link.label}</a>)}
+    </nav>
+    <header class="monitor-header">
+      <p class="eyebrow">Rushdan Indexing Monitor</p>
+      <h1>{title}</h1>
+      <p class="lead">{description}</p>
+    </header>
+    <div class="prose monitor-prose"><slot /></div>
+    <aside class="monitor-contact" aria-label="Operator and support">
+      <p class="kicker">Operator &amp; support</p>
+      <p><a href="/about/">Rushdan Rosdi</a> · <a href="mailto:rushdan@rushdanrosdi.com">rushdan@rushdanrosdi.com</a></p>
+      <p>For authorization questions, privacy enquiries or data deletion requests.</p>
+    </aside>
+  </article>
+</BaseLayout>
+
+<style>
+  .monitor-page { max-width: 850px; margin-inline: auto; padding: 3rem 0 5rem; }
+  .monitor-nav { display: flex; flex-wrap: wrap; gap: 1rem 1.8rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line); }
+  .monitor-nav a { color: var(--muted); font-size: 0.85rem; }
+  .monitor-nav a:hover, .monitor-nav a[aria-current='page'] { color: var(--accent); }
+  .monitor-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--line); }
+  .monitor-header h1 { font-size: clamp(2.35rem, 6vw, 4rem); overflow-wrap: anywhere; }
+  .monitor-prose { margin-top: 2.5rem; }
+  .monitor-prose :global(h2) { margin-top: 2.5rem; font-size: clamp(1.5rem, 3vw, 2rem); }
+  .monitor-prose :global(a), .monitor-contact a { color: var(--accent-bright); text-decoration: underline; text-underline-offset: 0.2em; overflow-wrap: anywhere; }
+  .monitor-prose :global(code) { font-size: 0.85em; overflow-wrap: anywhere; }
+  .monitor-prose :global(.monitor-status) { padding: 1rem 1.25rem; background: var(--panel); border: 1px solid var(--line-bright); }
+  .monitor-contact { margin-top: 3rem; padding: 1.5rem; background: var(--panel); border: 1px solid var(--line-bright); }
+  .monitor-contact p { margin-bottom: 0.6rem; }
+  .monitor-contact p:last-child { margin-bottom: 0; color: var(--muted); font-size: 0.85rem; }
+</style>

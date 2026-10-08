@@ -1,0 +1,26 @@
+---
+import GscMonitorLayout from '../../../../layouts/GscMonitorLayout.astro';
+---
+
+<GscMonitorLayout title="Privacy policy" description="How Rushdan Indexing Monitor accesses, uses and retains authorized indexing data." canonicalPath="/tools/gsc-monitor/privacy/" page="privacy">
+  <p><strong>Last updated: 8 October 2026.</strong> This policy covers Rushdan Indexing Monitor, operated by Rushdan Rosdi. The engine is prepared for deployment; the processing described below applies when monitoring is authorized and activated.</p>
+  <h2>Google OAuth permissions</h2>
+  <p>The application requests only <code>https://www.googleapis.com/auth/webmasters.readonly</code>. It reads the Search Console property identifiers and permission levels available to the consenting account, verifies access to the exact configured property, and retrieves official URL Inspection results. This Google permission is broader than one property; monitoring is limited by the engine's property configuration.</p>
+  <p>OAuth provides access and refresh tokens for authorized API calls, including unattended monitoring. The application does not receive your Google password or request Gmail, Drive, contacts or Google profile scopes.</p>
+  <h2>Data collected and purpose</h2>
+  <p>The engine processes configured property identifiers, monitored URLs, timestamps and Google URL Inspection responses. Results may include indexing verdicts, coverage and crawl states, last crawl dates, Google-selected and declared canonical URLs, rich-result information and inspection links. Full inspection responses are retained for reporting.</p>
+  <p>It also collects public sitemap membership and technical checks, including HTTP status, robots/noindex directives and canonical tags, together with run and error records needed to operate the monitor. Email enquiries may contain contact information you choose to provide.</p>
+  <p>Google Search Console data is used only for authorized indexing monitoring and reporting, including historical comparisons and manual-review lists. It is not sold, used for advertising, or used to train AI or machine-learning models.</p>
+  <h2>Storage and access</h2>
+  <p>Monitoring records are stored in Cloudflare D1. The engine uses Cloudflare Workers for processing and Cloudflare Worker secrets for its Google client secret, refresh token and administrative token. Short-lived Google access tokens are used during API processing. OAuth credentials are not part of these public pages.</p>
+  <p>The prepared engine requires an administrative token or a signed session to access dashboards and reports; these are not public pages. Cloudflare account permissions separately govern access to infrastructure and stored data. The engine does not currently provide individual user accounts or per-user roles.</p>
+  <p>Rushdan Rosdi administers the tool. Reports are for the operator and the relevant property owner or expressly authorized recipients. Human review of property-specific Google data requires that owner's authorization, except where needed for security or legal obligations. Google processes API requests, and Cloudflare hosts the engine and database. Google data is not shared with unrelated services.</p>
+  <h2>Retention</h2>
+  <p>The current engine has no automatic expiry or scheduled deletion of monitoring history. Records remain until the operator manually deletes them or retires the database. Removing a URL from a sitemap does not delete its history. OAuth credentials remain configured until removed or replaced; Google may revoke or expire tokens independently.</p>
+  <h2>Revoking access and requesting deletion</h2>
+  <p>You can revoke the application's Google permission through <a href="https://myaccount.google.com/connections">Google Account connections</a>. Revocation prevents future authorized Google API access once it takes effect; it does not automatically erase existing monitoring records or stop public website checks. Contact the operator to disable the property configuration and remove its credentials where applicable.</p>
+  <p>To request deletion, email <a href="mailto:rushdan@rushdanrosdi.com">rushdan@rushdanrosdi.com</a> with the relevant property and the records you want removed. Do not send passwords or tokens. The operator will verify your authority, arrange manual removal of applicable records and credentials, and confirm the outcome. There is no self-service deletion endpoint or guaranteed automatic deletion period. Any legal retention requirement or provider-managed recovery-copy limitation will be explained when handling the request.</p>
+  <h2>Public pages and policy changes</h2>
+  <p>These supporting pages do not initiate OAuth, set application login cookies or collect monitoring results. Hosting providers may process ordinary request metadata to deliver the pages. Existing site fonts load from Google Fonts. Private engine login cookies are separate from this website.</p>
+  <p>Rushdan Indexing Monitor's use and transfer of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including its Limited Use requirements. This policy will be updated before introducing materially different Google data uses, with renewed consent where required.</p>
+</GscMonitorLayout>
