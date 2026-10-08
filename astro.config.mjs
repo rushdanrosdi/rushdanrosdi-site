@@ -5,5 +5,7 @@ export default defineConfig({
   site: 'https://rushdanrosdi.com',
   output: 'static',
   trailingSlash: 'always',
-  integrations: [sitemap()],
+  integrations: [sitemap({
+    filter: (page) => !new URL(page).pathname.startsWith('/tools/gsc-monitor/'),
+  })],
 });

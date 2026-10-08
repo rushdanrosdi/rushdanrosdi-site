@@ -15,6 +15,7 @@ interface Props {
   schema?: Record<string, unknown>;
   socialImagePath?: string;
   socialImageAlt?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
   schema,
   socialImagePath,
   socialImageAlt = 'Rushdan Rosdi — AI Search & Visibility Specialist',
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(canonicalPath, Astro.site);
@@ -49,7 +51,7 @@ const socialImage = new URL(resolvedSocialImagePath, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content="Rushdan Rosdi" />
